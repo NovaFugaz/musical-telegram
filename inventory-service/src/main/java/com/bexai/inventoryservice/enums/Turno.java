@@ -1,0 +1,5 @@
+package com.bexai.inventoryservice.enums;
+
+public enum Turno {
+    MANANA, TARDE, NOCHE
+}
