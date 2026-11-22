@@ -13,22 +13,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity 
+@Entity
 @Table(name = "sucursales")
-@Getter 
+@Getter
 @Setter
-@AllArgsConstructor 
-@NoArgsConstructor 
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sucursal {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY) no lleva en el modelo (?)
     private Long idSucursal;
 
     @NotBlank(message = "El nombre de la sucursal es obligatorio")
     @Size(max = 100)
     @Column(nullable = false, length = 100)
     private String nombreSucursal;
+
+    @Size(max = 200)
+    @Column(length = 200)
+    private String direccion;
 
     @DecimalMin(value = "-90.0", message = "Latitud inválida")
     @DecimalMax(value = "90.0", message = "Latitud inválida")
@@ -38,14 +41,11 @@ public class Sucursal {
     @DecimalMax(value = "180.0", message = "Longitud inválida")
     private Double longitud;
 
-    @NotBlank(message = "La ciudad es obligatoria")
     @Size(max = 80)
-    @Column(nullable = false, length = 80)
+    @Column(length = 80)
     private String ciudad;
 
-    @NotBlank(message = "La ciudad es obligatoria")
     @Size(max = 80)
-    @Column(nullable = false, length = 80)
+    @Column(length = 80)
     private String region;
-
 }

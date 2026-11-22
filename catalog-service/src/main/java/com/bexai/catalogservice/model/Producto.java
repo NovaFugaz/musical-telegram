@@ -22,16 +22,16 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "productos")
-@Getter 
+@Getter
 @Setter
-@NoArgsConstructor 
-@AllArgsConstructor 
+@NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotBlank(message = "El SKU es obligatorio")
     @Size(max = 50)
     @Column(unique = true, nullable = false, length = 50)
@@ -46,12 +46,11 @@ public class Producto {
     @Column(nullable = false, length = 150)
     private String nombre;
 
-    // @NotBlank(message = "La descripción del producto es obligatoria") --> no se si dejarlo, deberia de ser obligatorio
     @Size(max = 500)
-    @Column(nullable = false, length = 150)
+    @Column(length = 500)
     private String descripcion;
 
-    @NotNull(message = "El valor de medida es obligatorio")
+    @NotNull(message = "La unidad de medida es obligatoria")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UnidadMedida unidadMedida;

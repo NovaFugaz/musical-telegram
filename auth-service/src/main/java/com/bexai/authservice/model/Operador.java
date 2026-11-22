@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.bexai.authservice.enums.Rol;
+import com.bexai.authservice.enums.Turno;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,15 +37,20 @@ public class Operador {
     private Long id;
 
     @NotBlank(message = "El código es obligatorio")
-    @Pattern(regexp = "^[A-Z]{2}-\\d{4}$, el código debe tener 7 caracteres.")
+    @Pattern(regexp = "^[A-Z]{2}-\\d{4}$", message = "El código debe tener 7 caracteres (ej. OP-1001)")
     @Column(unique = true, nullable = false, length = 7)
     private String codigo;
 
-    @NotBlank(message = "El PIN es obligatorio (6 dígitos)")
+    @NotBlank(message = "El PIN es obligatorio")
+    @Pattern(regexp = "^\\d{6}$", message = "El PIN debe tener 6 dígitos")
     @Column(nullable = false)
     private String pin;
 
-    @NotBlank(message = "El primer nombre es obligatorio")
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(max = 100)
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
     @Size(max = 50)
     @Column(nullable = false, length = 50)
     private String pNombre;
@@ -65,6 +71,15 @@ public class Operador {
     private Rol rol;
 
     @NotNull(message = "La fecha de ingreso es obligatoria")
+    @NotNull(message = "La sucursal es obligatoria")
+    @Column(nullable = false)
+    private Long sucursalId;
+
+    @NotNull(message = "El turno es obligatorio")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Turno turno;
+
     @PastOrPresent(message = "La fecha de ingreso no puede ser futura")
     private LocalDate fechaIngreso;
 
@@ -72,5 +87,5 @@ public class Operador {
 
     @NotNull
     @Column(nullable = false)
-    private Boolean activo;
+    private Boolean activo = true;
 }
