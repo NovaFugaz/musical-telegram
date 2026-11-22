@@ -2,14 +2,12 @@ package com.bexai.inventoryservice.model;
 
 import java.time.LocalDateTime;
 
-import com.bexai.inventoryservice.enums.Severidad;
+import com.bexai.inventoryservice.enums.SeveridadAlerta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -21,48 +19,57 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity 
+@Entity
 @Table(name = "alertas")
-@Getter 
-@Setter 
-@NoArgsConstructor 
-@AllArgsConstructor 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Alerta {
 
-    @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    
+    @Id
+    @Column(nullable = false, length = 50)
+    private String id;
 
     @NotBlank(message = "El titulo de la alerta es obligatorio")
     @Size(max = 150)
     @Column(nullable = false, length = 150)
-    private String tituloAlerta;  
-    
+    private String tituloAlerta;
+
     @NotBlank(message = "El SKU es obligatorio")
     @Column(nullable = false, length = 50)
-    private String sku;    
+    private String sku;
+
+    @Column(length = 13)
+    private String ean13;
+
+    @Size(max = 150)
+    @Column(length = 150)
+    private String nombreProducto;
 
     @NotNull(message = "El stock actual es obligatorio")
     @PositiveOrZero
     @Column(nullable = false)
-    private Integer stockActual;    
+    private Integer stockActual;
 
     @NotNull(message = "El stock requerido es obligatorio")
     @PositiveOrZero
     @Column(nullable = false)
     private Integer stockRequerido;
 
+    @Size(max = 200)
+    @Column(length = 200)
+    private String ubicacionNombre;
+
     @NotNull(message = "La severidad es obligatoria")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Severidad severidad;
+    private SeveridadAlerta severidad;
 
     @NotNull(message = "La fecha y hora son obligatorias")
     @Column(nullable = false)
     private LocalDateTime fechaHora;
 
-    @NotNull 
     @Column(nullable = false)
-    private Boolean atendida;
-
+    private Boolean atendida = false;
 }
