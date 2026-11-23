@@ -19,17 +19,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity 
+@Entity
 @Table(name = "tareas")
-@Getter 
-@Setter 
-@NoArgsConstructor 
-@AllArgsConstructor 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 7)
+    private String operadorCodigo;
 
     @NotBlank(message = "El título de la tarea es obligatorio")
     @Size(max = 150)
@@ -40,7 +43,7 @@ public class Tarea {
     @Column(length = 500)
     private String detalle;
 
-    @NotNull(message = "La accion es obligatoria")
+    @NotNull(message = "La acción es obligatoria")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccionTarea accion;

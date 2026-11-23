@@ -17,15 +17,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity 
-@Table(name = "inventario_sucursal", uniqueConstraints = @UniqueConstraint(columnNames = {"sku", "sucursal_id"}))
-@Getter 
-@Setter 
-@NoArgsConstructor 
-@AllArgsConstructor 
+@Entity
+@Table(name = "inventario_sucursal", uniqueConstraints = @UniqueConstraint(columnNames = { "sku", "sucursal_id" }))
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class InventarioSucursal {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,13 +36,13 @@ public class InventarioSucursal {
     @NotNull(message = "El id de la sucursal es obligatorio")
     @Column(name = "sucursal_id", nullable = false)
     private Long sucursalId;
-    
-    @NotNull(message = "El stock es obligatorioo")
+
+    @NotNull(message = "El stock es obligatorio")
     @PositiveOrZero(message = "El stock no puede ser negativo")
     @Column(nullable = false)
     private Integer stockTienda;
 
     @Valid
-    @Embedded 
+    @Embedded
     private Ubicacion ubicacion;
 }

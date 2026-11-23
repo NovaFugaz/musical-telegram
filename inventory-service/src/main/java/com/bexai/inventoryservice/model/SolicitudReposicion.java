@@ -39,7 +39,7 @@ public class SolicitudReposicion {
     @Column(nullable = false, length = 150)
     private String nombreProducto;
 
-    @NotNull(message = "La cantida es obligatoria")
+    @NotNull(message = "La cantidad es obligatoria")
     @Positive(message = "La cantidad debe ser mayor a 0")
     @Column(nullable = false)
     private Integer cantidad;
