@@ -16,13 +16,13 @@ SET nombre_sucursal = EXCLUDED.nombre_sucursal,
     region = EXCLUDED.region;
 
 -- 2. Productos de catálogo
-INSERT INTO productos (sku, ean13, nombre, descripcion, unidad_medida, valor, stock_minimo)
+INSERT INTO productos (sku, ean13, nombre, descripcion, unidad_medida, valor, stock_minimo, activo)
 VALUES
-    ('SKU-7704219', '7801234567890', 'Esmeril Angular 4 1/2" 850W Dewalt', 'Herramientas eléctricas pesadas', 'UN', 148420.0, 10),
-    ('SKU-8841920', '7809482100412', 'Taladro Percutor Inalámbrico 20V Dewalt', 'Motor Brushless Industrial', 'UN', 95000.0, 8),
-    ('SKU-3361284', '7805541299831', 'Disco de Corte Metal 4 1/2" Norton (x10)', 'Pack x10 unidades extra fino', 'CJ', 12500.0, 25),
-    ('SKU-5519283', '7806543210987', 'Sierra Circular 7 1/4" 1800W Bosch', 'Sierra circular profesional para corte de madera', 'UN', 119990.0, 5),
-    ('SKU-4409182', '7807654321098', 'Caja de Tornillos Autoperforantes 2" (x500)', 'Fijaciones galvanizadas de alta resistencia', 'CJ', 18900.0, 30)
+    ('SKU-7704219', '7801234567890', 'Esmeril Angular 4 1/2" 850W Dewalt', 'Herramientas eléctricas pesadas', 'UN', 148420.0, 10, true),
+    ('SKU-8841920', '7809482100412', 'Taladro Percutor Inalámbrico 20V Dewalt', 'Motor Brushless Industrial', 'UN', 95000.0, 8, true),
+    ('SKU-3361284', '7805541299831', 'Disco de Corte Metal 4 1/2" Norton (x10)', 'Pack x10 unidades extra fino', 'CJ', 12500.0, 25, true),
+    ('SKU-5519283', '7806543210987', 'Sierra Circular 7 1/4" 1800W Bosch', 'Sierra circular profesional para corte de madera', 'UN', 119990.0, 5, true),
+    ('SKU-4409182', '7807654321098', 'Caja de Tornillos Autoperforantes 2" (x500)', 'Fijaciones galvanizadas de alta resistencia', 'CJ', 18900.0, 30, true)
 ON CONFLICT (sku) DO UPDATE
 SET ean13 = EXCLUDED.ean13,
     nombre = EXCLUDED.nombre,
