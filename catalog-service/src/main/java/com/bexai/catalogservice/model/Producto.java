@@ -64,4 +64,7 @@ public class Producto {
     @PositiveOrZero(message = "El stock mínimo no puede ser negativo")
     @Column(nullable = false)
     private Integer stockMinimo;
+
+    @Column(nullable = false)
+    private Boolean activo = true;
 }

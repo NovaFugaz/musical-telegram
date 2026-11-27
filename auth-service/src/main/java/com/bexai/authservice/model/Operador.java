@@ -60,7 +60,7 @@ public class Operador {
     @Column(nullable = false, length = 50)
     private String apPaterno;
 
-    @NotBlank(message = "El apellido materno es obligatorio")
+    @NotNull(message = "El apellido materno es obligatorio")
     @Size(max = 50)
     @Column(nullable = false, length = 50)
     private String apMaterno;
