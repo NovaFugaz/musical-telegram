@@ -52,14 +52,14 @@ public class ProductoController {
     }
 
     // crea un nuevo producto
-    @PreAuthorize("hashAnyRole('TERRENO','BODEGA','GERENCIA')")
+    @PreAuthorize("hasAnyRole('TERRENO','BODEGA','GERENCIA')")
     @PostMapping
     public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productoService.crear(request));
     }
 
     // actualizar datos de un producto
-    @PreAuthorize("hashAnyRole('TERRENO','BODEGA','GERENCIA')")
+    @PreAuthorize("hasAnyRole('TERRENO','BODEGA','GERENCIA')")
     @PutMapping("/{sku}")
     public ResponseEntity<ProductoResponse> actualizar(
             @PathVariable String sku,

@@ -11,19 +11,20 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.bexai.catalogservice.dto.ErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
-@RestController 
-@Slf4j 
+@RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
-@ExceptionHandler(RecursoNoEncontradoException.class)
-    public ResponseEntity<ErrorResponse> handleNoEncontrado(RecursoNoEncontradoException ex, HttpServletRequest request) {
+    @ExceptionHandler(RecursoNoEncontradoException.class)
+    public ResponseEntity<ErrorResponse> handleNoEncontrado(RecursoNoEncontradoException ex,
+            HttpServletRequest request) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), null, request);
     }
 
@@ -40,7 +41,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex,
+            HttpServletRequest request) {
         List<String> details = ex.getBindingResult().getFieldErrors().stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.toList());
@@ -49,7 +51,8 @@ public class GlobalExceptionHandler {
 
     // JSON mal formado o valor de enum inválido
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorResponse> handleJsonInvalido(HttpMessageNotReadableException ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleJsonInvalido(HttpMessageNotReadableException ex,
+            HttpServletRequest request) {
         return build(HttpStatus.BAD_REQUEST, "Cuerpo de la petición inválido o mal formado", null, request);
     }
 
